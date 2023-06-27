@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Greatest Jokes</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+  <div id="joke-container">
+    <h1 id="joke">Loading...</h1>
+    <button id="new-joke-btn">New Joke</button>
+  </div>
+
+  <script src="jokes.js"></script>
+  <script>
+    const jokeElement = document.getElementById('joke');
+    const newJokeBtn = document.getElementById('new-joke-btn');
+
+    function getRandomJoke() {
+      const joke = jokes[Math.floor(Math.random() * jokes.length)];
+      jokeElement.textContent = joke;
+    }
+
+    newJokeBtn.addEventListener('click', getRandomJoke);
+
+
+    // Initial joke display
+    getRandomJoke();
+
+    
+  </script>
+
+  <!-- JavaScript code -->
+<script>
+  // Dad Jokes
+  const jokes = [
+    "Why don't scientists trust atoms? Because they make up everything!",
+    // ...add more jokes here
+  ];
+
+  let usedJokes = []; // Array to store used jokes
+
+  // Display a random joke that hasn't been used before
+  function displayJoke() {
+    // Check if all jokes have been used
+    if (usedJokes.length === jokes.length) {
+      usedJokes = []; // Reset used jokes array if all jokes have been used
+    }
+
+    let randomIndex;
+    let joke;
+
+    do {
+      randomIndex = Math.floor(Math.random() * jokes.length);
+      joke = jokes[randomIndex];
+    } while (usedJokes.includes(joke)); // Find an unused joke
+
+    usedJokes.push(joke); // Add the joke to used jokes array
+
+    const jokeContainer = document.getElementById("joke-container");
+    jokeContainer.innerHTML = `<div class="joke">${joke}</div>`;
+  }
+
+  // Get a new joke when the button is clicked
+  function getNewJoke() {
+    displayJoke();
+  }
+
+  // Initial joke display
+  displayJoke();
+</script>
+
+</body>
+</html>
